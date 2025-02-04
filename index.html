@@ -5,25 +5,24 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <!-- Seguridad adicional -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+        <!-- Seguridad adicional con ajustes para permitir Google Fonts, la API de TMDB y las imágenes -->
+        <meta http-equiv="Content-Security-Policy" content="
+            default-src 'self';
+            style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+            font-src 'self' https://fonts.gstatic.com;
+            connect-src 'self' https://api.themoviedb.org;
+            img-src 'self' https://image.tmdb.org;
+        ">
         
-        <!-- Compatibilidad con IE -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         
-        <!-- Título y descripción -->
         <title>Aplicación de Películas</title>
         <meta name="description" content="Aplicación para explorar y gestionar películas con una interfaz fácil de usar.">
         
-        <!-- Iconos de la app -->
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        
-        <!-- Hoja de estilos -->
         <link rel="stylesheet" href="style.css">
-    
-        <!-- Optimización de rendimiento -->
-        <meta http-equiv="Cache-Control" content="public, max-age=3600">
     </head>
+    
     
 <body>
     
