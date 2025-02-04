@@ -1,0 +1,467 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+:root{
+    --primary-color: #141414; /* Updated primary color */
+    --secondary-color: #e50914; /* Updated secondary color */
+    --accent-color: #ffffff; /* Additional color for accents */
+    --genre-action-color: #ff0000; /* Example for action genre */
+    --genre-drama-color: #00ff00; /* Example for drama genre */
+    /* Add more genre colors as needed */
+}
+
+body{
+    background-color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+header{
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    background-color: var(--secondary-color);
+}
+
+.search{
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    color: var(--accent-color);
+    font-family: inherit;
+}
+
+.search:focus{
+    outline: 0;
+    background-color: var(--primary-color);
+}
+
+.search::placeholder{
+    color: #7378c5;
+}
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.container {
+    max-width: 1200px; /* Set a max width for the container */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add some padding */
+}
+
+.movie {
+    width: 250px; /* Adjusted width for smaller container */
+    margin: 1rem;
+    border-radius: 8px; /* Updated for modern look */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Enhanced shadow */
+    background-color: var(--secondary-color);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease; /* Smooth transition */
+}
+
+.movie:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+}
+
+.movie img{
+    width: 100%;
+    height: 80%;
+}
+
+.movie-info{
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem 1rem;
+    letter-spacing: 0.5px;
+}
+
+.movie-info h3{
+    margin-top: 0;
+}
+
+.movie-info span{
+    background-color: var(--primary-color);
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.movie-info span.green{
+    color: var(--genre-drama-color); /* Example for drama genre */
+}
+
+.movie-info span.orange{
+    color: orange;
+}
+
+.movie-info span.red{
+    color: var(--genre-action-color); /* Example for action genre */
+}
+
+.overview{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent */
+    padding: 1rem;
+    max-height: 100%;
+    transform: translateY(101%);
+    transition: transform 0.3s ease-in;
+}
+
+.movie:hover .overview{
+    transform: translateY(0);
+}
+
+#tags{
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+}
+
+.tag{
+    color: var(--accent-color);
+    padding: 10px 20px;
+    background-color: orange;
+    border-radius: 50px;
+    margin: 5px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tag.highlight{
+    background-color: red;
+}
+
+.no-results{
+    color: var(--accent-color);
+}
+
+.pagination{
+    display: flex;
+    margin: 10px 30px;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-color);
+}
+
+.page{
+    padding: 20px;
+    cursor: pointer;
+}
+
+.page.disabled{
+    cursor: not-allowed;
+    color: grey;
+}
+
+.current{
+    padding: 10px 20px;
+    border-radius: 50%;
+    border: 5px solid orange;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.know-more{
+    background-color: orange;
+    color: var(--accent-color);
+    font-size: 16px;
+    font-weight: bold;
+    border: 0;
+    border-radius: 50px;
+    padding: 10px 20px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+/* Styles for Previous and Next buttons */
+#prev-recommended, #next-recommended {
+    background-color: var(--secondary-color);
+    color: var(--accent-color);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#prev-recommended:hover, #next-recommended:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Lighten on hover */
+}
+
+/* Recommended movie layout */
+.recommended-movie {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    justify-content: space-between; /* Space out elements */
+    margin: 1rem 0; /* Vertical spacing */
+}
+
+.movie-image {
+    width: 300px; /* Set a fixed width for the image */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0 1rem; /* Horizontal spacing */
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.movie-info {
+    display: flex;
+    flex-direction: column; /* Stack title and image vertically */
+    align-items: center; /* Center items */
+    text-align: center; /* Center the title text */
+}
+
+
+.recommended-movie .buttons {
+    display: flex;
+    flex-direction: row; /* Mantener botones en línea */
+    gap: 0.5rem; /* Espaciado entre botones */
+}
+
+
+#recommended-list {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap */
+    justify-content: center; /* Center items */
+}
+
+
+/* The Overlay (background) */
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+/* Position the content inside the overlay */
+.overlay-content {
+    position: relative;
+    top: 10%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* The navigation links inside the overlay */
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+
+/* Position the close button (top right corner) */
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-height: 450px) {
+    .overlay a {font-size: 20px}
+    .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+    }
+}
+
+.embed.hide{
+    display: none;
+}
+
+.embed.show{
+    display: inline-block;
+}
+
+.arrow {
+    position: fixed;
+    font-size: 24px;
+    color: var(--accent-color);
+    background: rgba(0,0,0,0.5);
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* When the overlay is open */
+.overlay[style*="width: 100%"] .arrow {
+    opacity: 1;
+    visibility: visible;
+}
+
+.arrow:hover {
+    background: rgba(0,0,0,0.8);
+}
+
+.arrow.left-arrow {
+    left: 20px;
+}
+
+.arrow.right-arrow {
+    right: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .arrow {
+        padding: 8px 12px;
+        font-size: 20px;
+    }
+}
+
+.dots{
+    margin-top: 30px;
+}
+
+.dots .dot {
+    padding: 5px 15px;
+    border-radius: 50%;
+    border: 5px solid var(--secondary-color);
+    color: var(--accent-color);
+    font-size: 20px;
+    font-weight: 600;
+    margin: 5px;
+}
+
+.dots .dot.active{
+    border-color: orange;
+}
+
+.movie-details {
+    padding: 20px;
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--accent-color);
+}
+
+.movie-details p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.movie-details .overview {
+    margin: 20px 0;
+    line-height: 1.8;
+    max-height: 150px; /* Set a maximum height */
+    overflow-y: auto;
+}
+
+.movie-details strong {
+    color: #ffd700;
+    margin-right: 10px;
+}
+
+/* Adjust for smaller screens */
+.video-nav {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.video-counter {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: var(--color-accent);
+    transition: width 0.3s ease;
+}
+
+/* Adjust movie card size for larger screens */
+@media (min-width: 768px) {
+    .movie {
+        width: 350px; /* Increase width for larger screens */
+    }
+}
+
+/* Adjust typography for larger screens */
+@media (min-width: 768px) {
+    .movie-info h3 {
+        font-size: 1.2em; /* Increase font size */
+    }
+    .movie-info span {
+        font-size: 1em; /* Increase font size */
+    }
+}
+
+h2 {
+    justify-content: center;
+    font-size: 2rem; /* Adjust font size as needed */
+    color: var(--accent-color); /* Use the accent color defined in :root */
+    margin: 1rem 0; /* Add margin for spacing */
+    text-align: center; /* Center the text */
+}
+
+/* Footer styles */
+.footer {
+    background-color: var(--secondary-color);
+    color: var(--accent-color);
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-text {
+    margin: 0.5rem 0;
+}
+
+.footer-link {
+    color: var(--accent-color);
+    text-decoration: underline;
+}

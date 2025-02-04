@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta name="google-site-verification" content="pAi3lcliT4Ygjtix1yapLSZVijv0ys1Ojn_vkAFHjSQ" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Seguridad adicional -->
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+        
+        <!-- Compatibilidad con IE -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        <!-- Título y descripción -->
+        <title>Aplicación de Películas</title>
+        <meta name="description" content="Aplicación para explorar y gestionar películas con una interfaz fácil de usar.">
+        
+        <!-- Iconos de la app -->
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        
+        <!-- Hoja de estilos -->
+        <link rel="stylesheet" href="style.css">
+    
+        <!-- Optimización de rendimiento -->
+        <meta http-equiv="Cache-Control" content="public, max-age=3600">
+    </head>
+    
+<body>
+    
+    <header>
+        <form  id="form">
+            <input type="text" placeholder="Buscar" id="search" class="search">
+        </form>
+    </header>
+    <div id="tags"></div>
+    <section id="recommended-movies">
+        <h2>Películas Recomendadas</h2>
+        <div id="recommended-list" class="carousel">
+            <!-- Movie items will be dynamically added here -->
+        </div>
+    </section>
+    <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="overlay-content" id="overlay-content"></div>
+        <a href="javascript:void(0)" class="arrow left-arrow" id="left-arrow">&#8656;</a>
+        <a href="javascript:void(0)" class="arrow right-arrow" id="right-arrow">&#8658;</a>
+    </div>
+    <main id="main"></main>
+    <div class="pagination">
+        <div class="page" id="prev">Página Anterior</div>
+        <div class="current" id="current">1</div>
+        <div class="page" id="next">Página Siguiente</div>
+    </div>
+
+    <footer class="footer">
+        <p class="footer-text">Creado por Federico Barzola</p>
+        <p class="footer-text">Data provided by <a href="https://www.themoviedb.org/" class="footer-link">TMDB</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
