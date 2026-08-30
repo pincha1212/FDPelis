@@ -1,55 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta name="google-site-verification" content="pAi3lcliT4Ygjtix1yapLSZVijv0ys1Ojn_vkAFHjSQ" />
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <!-- Updated Content Security Policy to allow inline scripts -->
-        <meta http-equiv="Content-Security-Policy" content="
-            default-src 'self';
-            script-src 'self' 'unsafe-inline';
-            style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-            font-src 'self' https://fonts.gstatic.com;
-            connect-src 'self' https://api.themoviedb.org;
-            img-src 'self' https://image.tmdb.org;
-        ">
-        
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        
-        <title>Aplicación de Películas</title>
-        <meta name="description" content="Aplicación para explorar y gestionar películas con una interfaz fácil de usar.">
-        
-        <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link rel="stylesheet" href="style.css">
-    </head>
+<head>
+    <meta name="google-site-verification" content="pAi3lcliT4Ygjtix1yapLSZVijv0ys1Ojn_vkAFHjSQ" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- [MODIFICADO] Política de seguridad actualizada para permitir fuentes y conexiones necesarias -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline';
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com;
+        connect-src 'self' https://api.themoviedb.org;
+        img-src 'self' https://image.tmdb.org;
+    ">
     
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Aplicación de Películas</title>
+    <meta name="description" content="Aplicación para explorar y gestionar películas con una interfaz fácil de usar.">
+    
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
-    
-    <header>
-        <form  id="form">
-            <input type="text" placeholder="Buscar" id="search" class="search">
-        </form>
+    <!-- [MODIFICADO] Header con logo y formulario de búsqueda -->
+    <header class="header">
+        <div class="header-container">
+            <h1 class="logo">🎬 CineApp</h1>
+            <form id="form" class="search-form">
+                <input type="text" placeholder="Buscar película..." id="search" class="search-input" aria-label="Buscar películas">
+            </form>
+        </div>
     </header>
-    <div id="tags"></div>
-    <section id="recommended-movies">
+
+    <!-- [MODIFICADO] Contenedor de géneros con mejor semántica -->
+    <nav id="tags" class="genre-tags" aria-label="Filtros por género"></nav>
+
+    <!-- [MODIFICADO] Sección de recomendadas con botones de control -->
+    <section id="recommended-movies" class="recommended-section">
         <h2>Películas Recomendadas</h2>
-        <div id="recommended-list" class="carousel">
-            <!-- Movie items will be dynamically added here -->
+        <div class="carousel-container">
+            <button id="prev-recommended" class="carousel-btn" aria-label="Anterior película recomendada">&#10094;</button>
+            <div id="recommended-list" class="carousel-track"></div>
+            <button id="next-recommended" class="carousel-btn" aria-label="Siguiente película recomendada">&#10095;</button>
         </div>
     </section>
+
+    <!-- [MODIFICADO] Overlay mejorado con estructura clara -->
     <div id="myNav" class="overlay">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="overlay-content" id="overlay-content"></div>
-        <a href="javascript:void(0)" class="arrow left-arrow" id="left-arrow">&#8656;</a>
-        <a href="javascript:void(0)" class="arrow right-arrow" id="right-arrow">&#8658;</a>
+        <a href="javascript:void(0)" class="arrow left-arrow" id="left-arrow">&#10094;</a>
+        <a href="javascript:void(0)" class="arrow right-arrow" id="right-arrow">&#10095;</a>
     </div>
-    <main id="main"></main>
+
+    <!-- [MODIFICADO] Contenedor principal de películas -->
+    <main id="main" class="movie-grid"></main>
+
+    <!-- [MODIFICADO] Paginación con botones -->
     <div class="pagination">
-        <div class="page" id="prev">Página Anterior</div>
-        <div class="current" id="current">1</div>
-        <div class="page" id="next">Página Siguiente</div>
+        <button id="prev" class="page-btn">Página Anterior</button>
+        <span id="current" class="current-page">1</span>
+        <button id="next" class="page-btn">Página Siguiente</button>
     </div>
 
     <footer class="footer">
