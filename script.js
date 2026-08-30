@@ -1,6 +1,6 @@
-// [MODIFICADO] Refactorización completa del script con mejoras de legibilidad y robustez
+// [MODIFICADO] Código refactorizado manteniendo funcionalidad original y adaptado a nuevos IDs/clases
 
-// ==================== CONSTANTES Y VARIABLES GLOBALES ====================
+// Constantes
 const API_KEY = 'api_key=c762b15b3425d7e3cc2462124dec3461';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_URL = `${BASE_URL}/discover/movie?sort_by=popularity.desc&language=es-ES&${API_KEY}`;
@@ -29,7 +29,7 @@ const genres = [
   { id: 37, name: 'Western' }
 ];
 
-// Elementos del DOM
+// Elementos DOM
 const main = document.getElementById('main');
 const form = document.getElementById('form');
 const searchInput = document.getElementById('search');
@@ -57,7 +57,7 @@ let totalVideos = 0;
 let currentRecommendedIndex = 0;
 let recommendedMovies = [];
 
-// ==================== FUNCIONES DE UTILIDAD ====================
+// Utilidades
 function getColor(vote) {
   if (vote >= 8) return 'green';
   if (vote >= 5) return 'orange';
@@ -65,7 +65,7 @@ function getColor(vote) {
 }
 
 function formatDate(dateString) {
-  if (!dateString) return 'Fecha no disponible';
+  if (!dateString) return 'No disponible';
   return new Date(dateString).toLocaleDateString('es-ES', {
     year: 'numeric',
     month: 'long',
@@ -73,7 +73,7 @@ function formatDate(dateString) {
   });
 }
 
-// ==================== MANEJO DE GÉNEROS ====================
+// Gestión de géneros
 function setGenre() {
   tagsEl.innerHTML = '';
   genres.forEach(genre => {
@@ -133,7 +133,7 @@ function clearButton() {
   }
 }
 
-// ==================== OBTENCIÓN Y RENDERIZADO DE PELÍCULAS ====================
+// Obtener y mostrar películas
 async function getMovies(url) {
   lastUrl = url;
   if (!url.includes('language=')) {
@@ -178,7 +178,7 @@ function showMovies(movies) {
     const movieEl = document.createElement('div');
     movieEl.classList.add('movie');
     movieEl.innerHTML = `
-      <img src="${poster_path ? IMG_URL + poster_path : 'https://via.placeholder.com/1080x1580'}" alt="${title}">
+      <img src="${poster_path ? IMG_URL + poster_path : 'https://via.placeholder.com/1080x1580'}" alt="${title}" loading="lazy">
       <div class="movie-info">
         <h3>${title}</h3>
         <span class="${getColor(vote_average)}">${vote_average.toFixed(1)}</span>
@@ -195,7 +195,7 @@ function showMovies(movies) {
   });
 }
 
-// ==================== OVERLAY Y DETALLES ====================
+// Overlay de detalles
 async function openNav(movie) {
   const id = movie.id;
   try {
@@ -207,7 +207,7 @@ async function openNav(movie) {
     overlay.style.width = '100%';
     const releaseDate = formatDate(movieData.release_date);
     let movieContent = `
-      <h1 class="no-results">${movieData.title}</h1>
+      <h1>${movieData.title}</h1>
       <div class="movie-details">
         <h3>Sinopsis</h3>
         ${movieData.overview || 'Sin sinopsis disponible.'}
@@ -296,7 +296,7 @@ function navigateRight() {
   showVideos();
 }
 
-// ==================== CARRUSEL DE RECOMENDADAS ====================
+// Carrusel de recomendadas
 async function getRecommendedMovies() {
   const recommendationsURL = `${BASE_URL}/movie/top_rated?${API_KEY}&language=es-ES`;
   try {
@@ -339,7 +339,7 @@ function nextRecommended() {
   showRecommendedMovie(currentRecommendedIndex);
 }
 
-// ==================== PAGINACIÓN ====================
+// Paginación
 function pageCall(page) {
   if (page < 1 || page > totalPages) return;
   const url = new URL(lastUrl);
@@ -347,7 +347,7 @@ function pageCall(page) {
   getMovies(url.toString());
 }
 
-// ==================== EVENTOS ====================
+// Eventos
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const searchTerm = searchInput.value.trim();
@@ -375,7 +375,7 @@ nextBtn.addEventListener('click', () => {
 prevRecommendedBtn.addEventListener('click', previousRecommended);
 nextRecommendedBtn.addEventListener('click', nextRecommended);
 
-// ==================== INICIALIZACIÓN ====================
+// Inicialización
 setGenre();
 getMovies(API_URL);
 getRecommendedMovies();
